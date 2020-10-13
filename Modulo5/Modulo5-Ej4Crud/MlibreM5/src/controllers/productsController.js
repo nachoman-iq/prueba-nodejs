@@ -9,12 +9,21 @@ console.log("pase por aca prod");
 const controller = {
 	// Root - Show all products
 	index: (req, res) => {
-		res.render('products', { products,toThousand});
+		res.render('products', { products, toThousand });
 	},
 
 	// Detail - Detail from one product
 	detail: (req, res) => {
-		res.render('detail',{products});
+		let productFind;
+		//busco el producto por id
+		products.forEach(function (product) {
+			if (product.id == req.params.id) {
+				//si corresponde el id, lo guardo y corto el bucle
+				productFind = product;
+				res.render('detail', { product: productFind,toThousand });
+			}
+		});
+//		res.render('detail', { products });
 	},
 
 	// Create - Form to create
